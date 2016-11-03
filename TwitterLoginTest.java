@@ -26,7 +26,7 @@ public class TwitterLoginTest {
 	static String linkTextClass = "u-linkComplex-target";
 	static String bodyLinkText = "andrewkanestest";
 
-	static WebDriver driver;;
+	static WebDriver driver;
 
 	@BeforeClass(alwaysRun = true)
 	public void before() {
@@ -66,19 +66,23 @@ public class TwitterLoginTest {
 		passwordInputElement.sendKeys(PASSWORD);
 
 		Thread.sleep(2000);
-		
+	
+		// Click Login button	
 		WebElement loginButtonElement = driver.findElement(By.className(userNameTextClass));
 		loginButtonElement = driver.findElement(By.xpath(loginButtonXPath));
 		loginButtonElement.click();
 
+		// Wait for page to load by checking to see if element is loaded
 		LOGGER.info("Starting poll for button");
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id(shortcutsButtonId)));
 
+		// Check page title
 		String actualTitle = driver.getTitle();
 		LOGGER.info("Page title is: " + actualTitle);
 		Assert.assertTrue(actualTitle.equals(pageTitle));
 
+		// Check for andrewkanestest link
 		LOGGER.info("Checking for andrewkanestest text on page");
 		String bodyText = driver.findElement(By.className(linkTextClass)).getText();
 		Assert.assertTrue(bodyText.contains("andrewkanestest"));
