@@ -49,7 +49,7 @@ public class TwitterLoginTest {
 		driver.get("https://twitter.com/login");
 		LOGGER.info("Successfully opened the website /twitter.com/login");
 
-		// Wait for 1 Sec
+		// Wait for 1 Sec 
 		Thread.sleep(1000);
 
 		// Find username textbox
